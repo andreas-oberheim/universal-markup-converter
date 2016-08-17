@@ -4,7 +4,7 @@ plugins {
 apply plugin: 'scala'
 
 repositories {
-    maven { url "http://nexus.it.nrw.de:8081/nexus/content/groups/public" }
+    mavenCentral()
 }
 
 dependencies {
