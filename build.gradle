@@ -17,8 +17,8 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
 apply plugin: 'scala'
+apply plugin: 'kotlin'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
