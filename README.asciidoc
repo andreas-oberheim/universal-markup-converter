@@ -1,2 +1,5 @@
-# universal-markup-converter
+universal-markup-converter
+
+image:https://travis-ci.org/andreas-oberheim/universal-markup-converter.svg?branch=master["Build Status", link="https://travis-ci.org/andreas-oberheim/universal-markup-converter"]
+
 universal markup converter for markup language like markdown, asciidoc or reStructuredText, written in and used by languages like Java, Kotlin, Scala or anything that works on the JVM
