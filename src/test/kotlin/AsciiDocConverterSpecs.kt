@@ -1,17 +1,17 @@
 /*
  * MIT License
  * Copyright (c) 2016 Andreas M. Oberheim
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,37 +20,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.universal_markup_converter.api
+import com.google.common.io.Resources.*
+import org.jetbrains.spek.api.Spek
+import org.universal_markup_converter.api.Convert
+import org.universal_markup_converter.api.InputType
+import org.universal_markup_converter.api.OutputType
+import java.io.File
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-class Convert(private val inputType: InputType,
-			  private val outputType: OutputType,
-			  private val fromFile: String,
-			  private val toFile: String) {
+class AsciiDocConverterSpecs : Spek({
 
-	companion object {
-		fun from(from: InputType) = Convert(from, OutputType.NONE, "", "")
-	}
+    given("sample asciidoc file") {
+        val inputFile = File(getResource("sample.adoc").toURI())
+        val outputFile = File(inputFile.toString() + ".html")
 
-	fun to(to: OutputType) = Convert(inputType, to, fromFile, toFile)
-	fun fromFile(file: String) = Convert(inputType, outputType, file, toFile)
-	fun toFile(file: String) = Convert(inputType, outputType, fromFile, file).convert()
-
-	private fun convert() {
-		when (inputType) {
-			InputType.MARKDOWN -> {
-				val converter = MarkdownConverter(outputType, fromFile, toFile)
-				converter.convert()
-			}
-			InputType.ASCIIDOC -> {
-				val converter = AsciiDocConverter(outputType, fromFile, toFile)
-				converter.convert()
-			}
-			InputType.RESTRUCTURED_TEXT -> throw Exception("unknown input type $inputType")
-			InputType.ORG_MODE -> throw Exception("unknown input type $inputType")
-			InputType.MEDIAWIKI -> throw Exception("unknown input type $inputType")
-			else -> throw Exception("unknown input type $inputType")
-		}
-	}
-
-}
+        on("converting to html") {
+            Convert.from(InputType.ASCIIDOC)
+                    .to(OutputType.HTML)
+                    .fromFile(inputFile.toString())
+                    .toFile(outputFile.toString())
+            it("should exist $outputFile") {
+                assertTrue(outputFile.exists(), "$outputFile doesn't exist")
+            }
+        }
+    }
+})
 
