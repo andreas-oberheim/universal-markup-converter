@@ -37,7 +37,7 @@ class AsciiDocConverter(outputType: OutputType,
 			else -> throw Exception("unknown output type $outputType")
 		}
 		val fromFile = File(fromFile)
-		val toFile = File(toFile)
+		// val toFile = File(toFile)
 
 		val asciidoctor = Asciidoctor.Factory.create()
 		asciidoctor.requireLibrary("asciidoctor-diagram")
