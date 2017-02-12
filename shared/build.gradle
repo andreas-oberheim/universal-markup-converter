@@ -1,0 +1,24 @@
+group 'universal-markup'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
+        mavenCentral()
+    }
+
+}
+
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
+    jcenter()
+}
+
+dependencies {
+    // programming languages
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}

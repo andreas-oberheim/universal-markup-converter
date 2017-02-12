@@ -29,7 +29,7 @@ import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class AsciiDocConverterSpecs : Spek({
+class AsciidocConverterSpecs : Spek({
 
     given("sample asciidoc file") {
         val inputFile = File(getResource("sample.adoc").toURI())
@@ -40,7 +40,7 @@ class AsciiDocConverterSpecs : Spek({
                     .to(OutputType.HTML)
                     .fromFile(inputFile.toString())
                     .toFile(outputFile.toString())
-            it("should exist $outputFile") {
+            it("should exist outputfile") {
                 assertTrue(outputFile.exists(), "$outputFile doesn't exist")
             }
         }

@@ -23,13 +23,15 @@
 package org.universal_markup_converter.api
 
 import org.asciidoctor.Asciidoctor
+import org.asciidoctor.Attributes
+import org.asciidoctor.Options
 import org.asciidoctor.SafeMode
 import org.asciidoctor.OptionsBuilder.*
 import java.io.File
 
-class AsciiDocConverter(outputType: OutputType,
-						fromFile: String,
-						toFile: String) : AbstractMarkupConverter(outputType, fromFile, toFile) {
+class AsciidocConverter(outputType: OutputType,
+                        fromFile: String,
+                        toFile: String) : AbstractMarkupConverter(outputType, fromFile, toFile) {
 
 	override fun convert() {
 		val outputType = when (outputType) {
@@ -37,12 +39,13 @@ class AsciiDocConverter(outputType: OutputType,
 			else -> throw Exception("unknown output type $outputType")
 		}
 		val fromFile = File(fromFile)
-		// val toFile = File(toFile)
+		val toFile = File(toFile)
 
 		val asciidoctor = Asciidoctor.Factory.create()
 		asciidoctor.requireLibrary("asciidoctor-diagram")
 		asciidoctor.convertFile(fromFile, options()
 				.backend(outputType)
+				.toFile(toFile)
 				.safe(SafeMode.SAFE)
 				.get())
 	}

@@ -42,7 +42,7 @@ class Convert(private val inputType: InputType,
 				converter.convert()
 			}
 			InputType.ASCIIDOC -> {
-				val converter = AsciiDocConverter(outputType, fromFile, toFile)
+				val converter = AsciidocConverter(outputType, fromFile, toFile)
 				converter.convert()
 			}
 			InputType.RESTRUCTURED_TEXT -> throw Exception("unknown input type $inputType")

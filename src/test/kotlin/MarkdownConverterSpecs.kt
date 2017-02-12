@@ -40,7 +40,7 @@ class MarkdownConverterSpecs : Spek({
                     .to(OutputType.HTML)
                     .fromFile(inputFile.toString())
                     .toFile(outputFile.toString())
-            it("should exist $outputFile") {
+            it("should exist outputfile") {
                 assertTrue(outputFile.exists(), "$outputFile doesn't exist")
             }
         }
