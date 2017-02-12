@@ -23,30 +23,23 @@
 package org.universal_markup_converter.api
 
 import org.asciidoctor.Asciidoctor
-import org.asciidoctor.Attributes
-import org.asciidoctor.Options
+import org.asciidoctor.OptionsBuilder.options
 import org.asciidoctor.SafeMode
-import org.asciidoctor.OptionsBuilder.*
 import java.io.File
 
-class AsciidocConverter(outputType: OutputType,
-                        fromFile: String,
-                        toFile: String) : AbstractMarkupConverter(outputType, fromFile, toFile) {
+class AsciidocToHtmlConverter(fromFile: String,
+                              toFile: String) : AbstractMarkupConverter(fromFile, toFile) {
 
-	override fun convert() {
-		val outputType = when (outputType) {
-			OutputType.HTML -> "html5"
-			else -> throw Exception("unknown output type $outputType")
-		}
-		val fromFile = File(fromFile)
-		val toFile = File(toFile)
+    override fun convert() {
+        val fromFile = File(fromFile)
+        val toFile = File(toFile)
 
-		val asciidoctor = Asciidoctor.Factory.create()
-		asciidoctor.requireLibrary("asciidoctor-diagram")
-		asciidoctor.convertFile(fromFile, options()
-				.backend(outputType)
-				.toFile(toFile)
-				.safe(SafeMode.SAFE)
-				.get())
-	}
+        val asciidoctor = Asciidoctor.Factory.create()
+        asciidoctor.requireLibrary("asciidoctor-diagram")
+        asciidoctor.convertFile(fromFile, options()
+                .backend("html")
+                .toFile(toFile)
+                .safe(SafeMode.SAFE)
+                .get())
+    }
 }

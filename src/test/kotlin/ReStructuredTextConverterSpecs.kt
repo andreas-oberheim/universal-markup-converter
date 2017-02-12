@@ -29,14 +29,14 @@ import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class AsciidocConverterSpecs : Spek({
+class ReStructuredTextConverterSpecs : Spek({
 
-    given("sample asciidoc file") {
-        val inputFile = File(getResource("sample.adoc").toURI())
+    given("sample rst file") {
+        val inputFile = File(getResource("sample.rst").toURI())
         val outputFile = File(inputFile.toString() + ".html")
 
-        on("converting to html") {
-            Convert.from(InputType.ASCIIDOC)
+        on("converting to rst") {
+            Convert.from(InputType.RST)
                     .to(OutputType.HTML)
                     .fromFile(inputFile.toString())
                     .toFile(outputFile.toString())
@@ -46,13 +46,13 @@ class AsciidocConverterSpecs : Spek({
         }
     }
 
-    given("sample asciidoc file") {
-        val inputFile = File(getResource("sample.adoc").toURI())
-        val outputFile = File(inputFile.toString() + ".xhtml")
+    given("sample restructuredtext file") {
+        val inputFile = File(getResource("sample.restructuredtext").toURI())
+        val outputFile = File(inputFile.toString() + ".html")
 
-        on("converting to xhtml") {
-            Convert.from(InputType.ASCIIDOC)
-                    .to(OutputType.XHTML)
+        on("converting to restructuredtext ") {
+            Convert.from(InputType.RESTRUCTURED_TEXT)
+                    .to(OutputType.HTML)
                     .fromFile(inputFile.toString())
                     .toFile(outputFile.toString())
             it("should exist outputfile") {
@@ -61,49 +61,20 @@ class AsciidocConverterSpecs : Spek({
         }
     }
 
-    given("sample asciidoc file") {
-        val inputFile = File(getResource("sample.adoc").toURI())
-        val outputFile = File(inputFile.toString() + ".manpage")
+    /*
+    xgiven("sample rst file") {
+        val inputFile = File(getResource("sample.rst").toURI())
+        val outputFile = File(inputFile.toString() + ".pdf")
 
-        on("converting to manpage") {
-            Convert.from(InputType.ASCIIDOC)
-                    .to(OutputType.MANPAGE)
+        on("converting to restructuredtext ") {
+            Convert.from(InputType.RST)
+                    .to(OutputType.PDF)
                     .fromFile(inputFile.toString())
                     .toFile(outputFile.toString())
             it("should exist outputfile") {
                 assertTrue(outputFile.exists(), "$outputFile doesn't exist")
             }
         }
-    }
-
-    given("sample asciidoc file") {
-        val inputFile = File(getResource("sample.adoc").toURI())
-        val outputFile = File(inputFile.toString() + ".docbook45.xml")
-
-        on("converting to docbook45") {
-            Convert.from(InputType.ASCIIDOC)
-                    .to(OutputType.DOCBOOK45)
-                    .fromFile(inputFile.toString())
-                    .toFile(outputFile.toString())
-            it("should exist outputfile") {
-                assertTrue(outputFile.exists(), "$outputFile doesn't exist")
-            }
-        }
-    }
-
-    given("sample asciidoc file") {
-        val inputFile = File(getResource("sample.adoc").toURI())
-        val outputFile = File(inputFile.toString() + ".docbook.xml")
-
-        on("converting to docbook") {
-            Convert.from(InputType.ASCIIDOC)
-                    .to(OutputType.DOCBOOK)
-                    .fromFile(inputFile.toString())
-                    .toFile(outputFile.toString())
-            it("should exist outputfile") {
-                assertTrue(outputFile.exists(), "$outputFile doesn't exist")
-            }
-        }
-    }
+    }*/
 })
 

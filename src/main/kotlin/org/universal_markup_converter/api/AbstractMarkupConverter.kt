@@ -22,6 +22,7 @@
  */
 package org.universal_markup_converter.api
 
-enum class InputType {
-	MARKDOWN, RESTRUCTURED_TEXT, MEDIAWIKI, ASCIIDOC, ORG_MODE
+abstract class AbstractMarkupConverter(val fromFile: String,
+									   val toFile: String) {
+	abstract fun convert()
 }

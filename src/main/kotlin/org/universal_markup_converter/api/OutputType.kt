@@ -22,21 +22,6 @@
  */
 package org.universal_markup_converter.api
 
-import laika.api.Transform
-import java.io.File
-import laika.render.HTML
-import laika.parse.markdown.Markdown
-
-class MarkdownConverter(outputType: OutputType,
-                        fromFile: String,
-                        toFile: String) extends AbstractMarkupConverter(outputType, fromFile, toFile) {
-
-  override def convert() {
-    val outputType =
-      this.outputType match {
-        case OutputType.HTML => HTML
-        case _ => throw new Exception(s"unknown output type $this.outputType")
-      }
-    Transform from Markdown to outputType fromFile fromFile toFile toFile
-  }
+enum class OutputType {
+    HTML, XHTML, DOCBOOK, DOCBOOK45, MANPAGE, PDF, CSV, NONE
 }

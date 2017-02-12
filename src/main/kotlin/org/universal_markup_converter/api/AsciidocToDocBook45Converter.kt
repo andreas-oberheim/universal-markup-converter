@@ -22,8 +22,24 @@
  */
 package org.universal_markup_converter.api
 
-abstract class AbstractMarkupConverter(val outputType: OutputType,
-									   val fromFile: String,
-									   val toFile: String) {
-	abstract fun convert()
+import org.asciidoctor.Asciidoctor
+import org.asciidoctor.OptionsBuilder.options
+import org.asciidoctor.SafeMode
+import java.io.File
+
+class AsciidocToDocBook45Converter(fromFile: String,
+                              toFile: String) : AbstractMarkupConverter(fromFile, toFile) {
+
+    override fun convert() {
+        val fromFile = File(fromFile)
+        val toFile = File(toFile)
+
+        val asciidoctor = Asciidoctor.Factory.create()
+        asciidoctor.requireLibrary("asciidoctor-diagram")
+        asciidoctor.convertFile(fromFile, options()
+                .backend("docbook45")
+                .toFile(toFile)
+                .safe(SafeMode.SAFE)
+                .get())
+    }
 }
